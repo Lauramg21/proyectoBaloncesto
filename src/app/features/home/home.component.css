@@ -1,0 +1,107 @@
+/* Estilos generales para la clase .home */
+.home {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    background-image: url('../../assets/images/BALONCESTO.jpg'); /* Ruta correcta desde src */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+  }
+  
+  /* Títulos */
+  h2 {
+    font-size: 7rem;
+    color: var(--main-color);
+    text-shadow: 3px 3px 3px var(--shadow-color);
+  }
+  
+  h1 {
+    font-size: 9rem;
+    color: black;
+    text-shadow: 3px 3px 3px var(--shadow-color);
+  }
+  
+  /* Párrafo */
+  p {
+    font-size: 1.2rem;
+    color: #4caf50;
+  }
+  
+  /* Botón */
+  button {
+    margin-top: 25px;
+    background-color: var(--main-color2);
+    border-radius: 20px;
+    border: 5px solid var(--main-color);
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  button:hover {
+    transform: scale(1.1);
+  }
+  
+  /* ---------------------------------------- */
+  /* Responsivo para móviles (max-width: 600px) */
+  @media (max-width: 767px) {
+    .home {
+      padding: 1rem; /* Reducir el padding en móviles */
+      background-size: contain;
+
+    }
+  
+    h1 {
+      font-size: 2.5rem; /* Reducir el tamaño del título principal */
+    }
+  
+    h2 {
+        margin-top: 15px;
+      font-size: 4rem; /* Reducir el tamaño del título secundario */
+    }
+  
+    p {
+      font-size: 1rem; /* Reducir el tamaño del texto */
+    }
+  
+    button {
+      font-size: 1.2rem; /* Reducir el tamaño del botón */
+      padding: 12px; /* Reducir el padding del botón */
+    }
+  }
+  
+  /* Responsivo para tabletas (max-width: 768px) */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .home {
+      padding: 1.5rem; /* Ajustar el padding */
+    }
+  
+    h1 {
+      font-size: 6rem; /* Reducir tamaño del título principal */
+    }
+  
+    h2 {
+      font-size: 6rem; /* Reducir tamaño del título secundario */
+    }
+  
+    p {
+      font-size: 1.1rem; /* Ajustar tamaño del texto */
+    }
+  
+    button {
+      font-size: 1.3rem; /* Ajustar tamaño del botón */
+      padding: 14px; /* Ajustar padding del botón */
+    }
+  }
+  
+
+  
+  

@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --black-color: #0000; /* Negro */
+  --main-color: #ed6b44; /* Naranja claro */
+  --main-color2: #ed6b4490; /* Naranja claro */
+  --footer-color: #793300; /* Naranja oscuro para el pie de página */
+  --shadow-color: rgba(48, 48, 48, 0.55);
+  --navbar-color: #d3d3d36d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;  /* Establece un layout de columna */
+    min-height: 100%;
+  }
+
+
+  

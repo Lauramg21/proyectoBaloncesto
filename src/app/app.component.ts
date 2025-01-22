@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { NavbarComponent } from './layouts/navbar/navbar.component';  // Asegúrate de importar
+import { FooterComponent } from './layouts/footer/footer.component';  // Asegúrate de importar
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [RouterModule, NavbarComponent, FooterComponent]  // Agrega los componentes aquí
 })
-export class AppComponent {
-  title = 'proyectoBaloncesto';
-}
+export class AppComponent {}
+

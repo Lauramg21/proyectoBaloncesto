@@ -1,0 +1,17 @@
+<table>
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns">{{ column }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data" (click)="onRowClick(row)">
+        <td *ngFor="let key of getObjectKeys(row)">{{ row[key] }}</td>
+        <td>
+          <button *ngIf="actions.includes('Editar')" (click)="onEdit(row)">Editar</button>
+          <button *ngIf="actions.includes('Eliminar')" (click)="onDelete(row)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

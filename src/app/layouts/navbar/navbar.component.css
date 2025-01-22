@@ -1,0 +1,132 @@
+/* Navbar */
+.navbar {
+  background-color: var(--navbar-color);
+  padding: 1.4rem 0;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
+
+}
+
+.hamburgerContainer{
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  margin-left: 10px;
+  height: 100%;
+  align-items: center;
+}
+
+.nav-links {
+  font-size: 1.2rem;
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin-right: 30px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  transition: transform 0.3s ease; /* Suaviza el aumento del tamaño */
+  cursor: pointer;
+}
+
+.navbar .nav-links li a:hover {
+  color: var(--main-color); /* Aumenta el tamaño al 120% */
+}
+
+.hamburger{
+  visibility: hidden;
+}
+
+/* Media Query para pantallas móviles */
+@media (max-width: 767px) {
+  .navbar .container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 10px;
+  }
+
+  .navbar .logo {
+    font-size: 1.3rem; /* Reduce el tamaño del logo en móviles */
+  }
+
+  .hamburgerContainer{
+    display: flex;
+    flex-direction: row;
+  }
+  .navbar .nav-links {
+    font-size: 1rem; /* Reducir tamaño de los enlaces */
+    margin-top: 1rem;
+    display: none; /* Por defecto, los enlaces estarán ocultos */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar .nav-links.show {
+    display: flex; /* Mostrar los enlaces al activar el menú */
+  }
+
+  /* Añadir un botón de hamburguesa en móviles */
+  .navbar .hamburger {
+    visibility: visible;
+    display: block;
+    cursor: pointer;
+
+  }
+
+  /* Ajustes del icono del menú hamburguesa */
+  .navbar .hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin: 5px 0;
+    transition: 0.3s;
+  }
+  .navbar .hamburger img {
+    width: 23px; /* Ajusta el tamaño de la imagen */
+    height: 23px;
+    display: block; /* Asegura que la imagen se muestre */
+    cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+    transition: transform 0.3s ease; /* Transición para el icono */
+    background-image: url('../../assets/images/menu-hamburguesa.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  /* Efecto de hover */
+  .navbar .hamburger img:hover {
+    transform: scale(1.2); /* Aumenta el tamaño de la imagen cuando se pasa el cursor */
+  }
+}
+
+/* Media Query para pantallas medianas (tabletas) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .navbar .container {
+    flex-direction: row;
+  }
+
+  .navbar .nav-links {
+    font-size: 1.1rem; /* Ajusta el tamaño de los enlaces en tabletas */
+    gap: 1.8rem; /* Ajusta el espacio entre enlaces */
+    margin-right: 20px;
+  }
+
+}
+
+
+
