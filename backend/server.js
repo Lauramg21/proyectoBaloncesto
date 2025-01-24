@@ -29,3 +29,29 @@ app.get('/api/secciones', (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`);
 });
+
+// Endpoint para eliminar una sección
+app.delete('/api/secciones/:id', (req, res) => {
+  const id = req.params.id;
+
+  pool.query('DELETE FROM Secciones WHERE id = ?', [id], (err, results) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({ message: 'Sección eliminada exitosamente' });
+  });
+});
+
+// Endpoint para obtener los equipos de una sección
+app.get('/api/equipos/:id', (req, res) => {
+  const sectionId = req.params.id;
+
+  pool.query('SELECT * FROM Equipos WHERE IdSeccion = ?', [sectionId], (err, results) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(results);
+  });
+});

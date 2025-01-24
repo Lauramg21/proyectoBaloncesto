@@ -5,11 +5,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of data" (click)="onRowClick(row)">
+      <tr *ngFor="let row of data">
         <td *ngFor="let key of getObjectKeys(row)">{{ row[key] }}</td>
-        <td>
-          <button *ngIf="actions.includes('Editar')" (click)="onEdit(row)">Editar</button>
-          <button *ngIf="actions.includes('Eliminar')" (click)="onDelete(row)">Eliminar</button>
+        <td class="botones">
+          <button  *ngIf="actions.includes('Seleccionar')" (click)="onSelect(row)">          
+            <i class="fas fa-check"></i>
+          </button>
+        </td>
+        <td class="botones">
+          <button  *ngIf="actions.includes('Editar')" (click)="onEdit(row)">
+            <i class="fas fa-edit"></i>
+          </button>
+         
+        </td>
+        <td class="botones">
+          <button  *ngIf="actions.includes('Eliminar')" (click)="onDelete(row)">
+            <i class="fas fa-trash"></i>
+          </button>
         </td>
       </tr>
     </tbody>

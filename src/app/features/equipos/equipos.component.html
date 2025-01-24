@@ -1,0 +1,13 @@
+<div *ngIf="equiposData.length > 0">
+    <h2>Equipos de la Sección</h2>
+    <app-table
+      [data]="equiposData"
+      [columns]="columns"
+      [actions]="actions">
+    </app-table>
+  </div>
+  
+  <!-- Si no hay equipos, mostramos un mensaje -->
+  <div *ngIf="equiposData.length === 0">
+    <p>No hay equipos en esta sección.</p>
+  </div>

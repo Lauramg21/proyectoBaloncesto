@@ -1,12 +1,14 @@
 <div class="secciones-container">
-    <h1>Secciones</h1>
-    <app-table
-      [data]="seccionesData"
-      [columns]="columns"
-      [actions]="actions"
-      (edit)="onEdit($event)"
-      (delete)="onDelete($event)"
-      (rowClick)="onRowClick($event)">
-    </app-table>
-  </div>
-  
+  <h1>Secciones</h1>
+  <app-table
+    [data]="seccionesData"
+    [columns]="columns"
+    [actions]="actions"
+    (select)="onSelect($event)"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)">
+  </app-table>
+
+  <!-- Solo mostrar los equipos si se ha seleccionado una sección -->
+  <app-equipos *ngIf="selectedSectionId !== null" [sectionId]="selectedSectionId"></app-equipos>
+</div>

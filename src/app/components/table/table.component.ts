@@ -15,21 +15,24 @@ export class TableComponent {
 
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
-  @Output() rowClick = new EventEmitter<any>();
+  @Output() select = new EventEmitter<any>(); // Aquí está el evento select
 
   // Función para obtener las claves de un objeto
   getObjectKeys(row: any): string[] {
     return Object.keys(row);
   }
 
-  onRowClick(item: any) {
-    this.rowClick.emit(item);
-  }
-
+  // Emisión de evento de edición
   onEdit(item: any) {
     this.edit.emit(item);
   }
 
+  // Emisión de evento de selección (corregido)
+  onSelect(item: any) {
+    this.select.emit(item);  // Emite el evento 'select' correctamente
+  }
+
+  // Emisión de evento de eliminación
   onDelete(item: any) {
     this.delete.emit(item);
   }
