@@ -1,0 +1,42 @@
+<div *ngIf="equipoName">
+    <button class="back-button" (click)="volverAEquipos()">
+      <div class="botonVolver">
+        {{ equipoName }} <i class="fas fa-times"></i>
+      </div>
+    </button>
+  </div>
+
+<div class="jugadores-container" *ngIf="jugadoresData.length > 0">
+    <h1>Jugadores del {{ equipoName }}</h1>
+    <app-table [data]="jugadoresData" [columns]="columns" [actions]="actions" (edit)="onEdit($event)"
+      (delete)="onDelete($event)" (select)="onSelect($event)">
+    </app-table>
+  </div>
+
+  <div *ngIf="jugadoresData.length === 0">
+    <p>No hay equipos en esta sección.</p>
+  </div>
+  
+  <!-- Botón para añadir un nuevo jugador -->
+  <div class="botonAnadir">
+    <button (click)="abrirVentana()">Añadir Jugador</button>
+  </div>
+  
+  <!-- Modal para crear o editar jugadores -->
+  <div *ngIf="mostrarVentana" class="ventana">
+    <div class="ventana-content">
+      <h2>{{ jugadorEditar ? 'Editar Jugador' : 'Nuevo Jugador' }}</h2>
+      <div class="input">
+        <div class="titulo"> Nombre Jugador: </div>
+        <input [(ngModel)]="nuevoJugador.nombre" placeholder="Nombre del Jugador" />
+      </div>
+      <div class="input">
+        <div class="titulo"> Número Jugador: </div>
+        <input [(ngModel)]="nuevoJugador.numero" placeholder="Numero del Jugador" />
+      </div>
+      <div class="botones">
+        <button (click)="jugadorEditar ? editarJugador() : crearJugador()">Guardar</button>
+        <button (click)="cerrarVentana()">Cancelar</button>
+      </div>
+    </div>
+  </div>

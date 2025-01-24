@@ -1,13 +1,37 @@
-<div *ngIf="equiposData.length > 0">
-    <h2>Equipos de la Sección</h2>
-    <app-table
-      [data]="equiposData"
-      [columns]="columns"
-      [actions]="actions">
-    </app-table>
+<div *ngIf="sectionName">
+  <button class="back-button" (click)="volverASecciones()">
+    <div class="botonVolver">
+      {{ sectionName }} <i class="fas fa-times"></i>
+    </div>
+  </button>
+</div>
+
+<div class="equipos-container" *ngIf="equiposData.length > 0">
+  <h1>Equipos de {{ sectionName }}</h1>
+  <app-table [data]="equiposData" [columns]="columns" [actions]="actions" (edit)="onEdit($event)"
+    (delete)="onDelete($event)" (select)="onSelect($event)">
+  </app-table>
+</div>
+
+<div *ngIf="equiposData.length === 0">
+  <p>No hay equipos en esta sección.</p>
+</div>
+
+<!-- Botón para añadir un nuevo equipo -->
+<div class="botonAnadir">
+  <button (click)="abrirVentana()">Añadir Equipo</button>
+</div>
+
+<!-- Modal para crear o editar equipos -->
+<div *ngIf="mostrarVentana" class="ventana">
+  <div class="ventana-content">
+    <h2>{{ equipoEditar ? 'Editar Equipo' : 'Nuevo Equipo' }}</h2>
+    <div class="input">
+      <input [(ngModel)]="nuevoEquipo.nombre" placeholder="Nombre del equipo" />
+    </div>
+    <div class="botones">
+      <button (click)="equipoEditar ? editarEquipo() : crearEquipo()">Guardar</button>
+      <button (click)="cerrarVentana()">Cancelar</button>
+    </div>
   </div>
-  
-  <!-- Si no hay equipos, mostramos un mensaje -->
-  <div *ngIf="equiposData.length === 0">
-    <p>No hay equipos en esta sección.</p>
-  </div>
+</div>

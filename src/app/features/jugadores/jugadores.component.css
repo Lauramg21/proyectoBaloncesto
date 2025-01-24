@@ -1,7 +1,12 @@
-.equipos-container {
+.jugadores-container {
     margin-top: 20px;
     margin-left: 50px;
     margin-right: 50px;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 50px;
   }
 
   .botonVolver{
@@ -26,11 +31,6 @@
   }
   .botonVolver i{
     margin-left: 4px;
-  }
-
-  h1 {
-    text-align: center;
-    margin-bottom: 50px;
   }
   
   .botonAnadir{
@@ -86,8 +86,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 80%;
   }
+  .ventana-content .input .titulo{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2px;
+  }
+
   .ventana-content .input input {
     width: 100%;
     margin-bottom: 20px;

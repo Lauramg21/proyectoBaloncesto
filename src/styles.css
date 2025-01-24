@@ -17,7 +17,7 @@
   body {
     display: flex;
     flex-direction: column;  /* Establece un layout de columna */
-    min-height: 100%;
+    min-height: 100vh;
   }
 
 

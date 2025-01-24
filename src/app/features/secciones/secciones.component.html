@@ -1,14 +1,31 @@
 <div class="secciones-container">
   <h1>Secciones</h1>
-  <app-table
-    [data]="seccionesData"
-    [columns]="columns"
-    [actions]="actions"
-    (select)="onSelect($event)"
-    (edit)="onEdit($event)"
-    (delete)="onDelete($event)">
+
+  <!-- Tabla -->
+  <app-table [data]="seccionesData" [columns]="columns" [actions]="actions" (select)="onSelect($event)"
+    (edit)="onEdit($event)" (delete)="onDelete($event)">
   </app-table>
 
+  <!-- Botón para añadir una nueva sección -->
+  <div class="botonAnadir">
+    <button (click)="abrirVentana()">Añadir Sección</button>
+  </div>
+
   <!-- Solo mostrar los equipos si se ha seleccionado una sección -->
-  <app-equipos *ngIf="selectedSectionId !== null" [sectionId]="selectedSectionId"></app-equipos>
+  <app-equipos *ngIf="selectedSectionId !== null" ></app-equipos>
+
+  <!-- Ventana de creación o edición de secciones -->
+  <div *ngIf="mostrarVentana" class="ventana">
+    <div class="ventana-content">
+      <h2>{{ seccionEditar ? 'Editar Sección' : 'Nueva Sección' }}</h2>
+      <div class="input">
+        <input [(ngModel)]="nuevaSeccion.nombre"
+          [placeholder]="seccionEditar ? 'Nombre de la sección' : 'Nueva sección'" />
+      </div>
+      <div class="botones">
+        <button (click)="seccionEditar ? editarSeccion() : crearSeccion()">Guardar</button>
+        <button (click)="cerrarVentana()">Cancelar</button>
+      </div>
+    </div>
+  </div>
 </div>

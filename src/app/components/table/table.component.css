@@ -2,6 +2,20 @@ table {
     width: 100%;
     border-collapse: collapse;
   }
+
+  thead tr th{
+    background-color: var(--main-color);
+  }
+
+  i {
+    width: 25px;
+    height: 25px;
+    transition: transform 0.3s ease;
+  }
+  
+  i:hover {
+    transform: scale(1.2); /* Aplica la escala cuando el cursor pasa por encima */
+  }
   
   th, td {
     padding: 8px;
@@ -13,10 +27,7 @@ table {
     background-color: #f4f4f4;
   }
   
-  tr:hover {
-    background-color: #f1f1f1;
-  }
-  
+
   button{
     background-color: transparent;
     border: none;
