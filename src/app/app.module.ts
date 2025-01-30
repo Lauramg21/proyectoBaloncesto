@@ -9,7 +9,7 @@ import { HomeComponent } from './features/home/home.component';
 import { SeccionesComponent } from './features/secciones/secciones.component';
 import { TableComponent } from './components/table/table.component';
 import { EquiposComponent } from './features/equipos/equipos.component';
-
+import { DataService } from './core/services/data.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +25,7 @@ import { EquiposComponent } from './features/equipos/equipos.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

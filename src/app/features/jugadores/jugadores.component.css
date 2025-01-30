@@ -1,3 +1,7 @@
+.selecciones{
+  display: flex;
+  flex-direction: row;
+}
 .jugadores-container {
     margin-top: 20px;
     margin-left: 50px;
@@ -11,7 +15,7 @@
 
   .botonVolver{
     margin-top: 30px;
-    margin-left: 50px;
+    margin-left: 20px;
     display: flex;
     justify-content: center;
     align-items: center;

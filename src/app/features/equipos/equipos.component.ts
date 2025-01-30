@@ -5,7 +5,7 @@ import { TableComponent } from '../../components/table/table.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';  // Importa Router
 import { FormsModule } from '@angular/forms';
-
+import { DataService } from '../../core/services/data.service';
 @Component({
   selector: 'app-equipos',
   imports: [TableComponent, CommonModule, HttpClientModule, FormsModule],
@@ -16,27 +16,28 @@ export class EquiposComponent implements OnInit {
   equiposData: any[] = [];
   columns: string[] = ['id', 'nombreSeccion', 'equipo'];  
   actions = ['Seleccionar', 'Editar', 'Eliminar'];
+ 
   sectionName: string = '';  
-  sectionId: number | null = null; // Declaramos el sectionId aquí
+  sectionId: number | null = null; 
+  
   selectedEquipoId: number | null = null;
-
+ 
   mostrarVentana = false;
+  
   nuevoEquipo = { nombre: '' };
   equipoEditar: any = null;
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: DataService) {  console.log('Servicio inyectado:', dataService);
+  }
 
   ngOnInit(): void {
     // Usamos ActivatedRoute para obtener el sectionId de la URL
-    this.route.params.subscribe(params => {
-      this.sectionId = +params['id']; 
+      this.sectionId = this.dataService.getSeccionId();
       console.log(this.sectionId);// Aquí sacamos el id de la ruta y lo convertimos a número
       if (this.sectionId !== null) {      
-        console.log("2" + this.sectionId);// Aquí sacamos el id de la ruta y lo convertimos a número
-
         this.cargarSeccion();  // Primero obtenemos el nombre de la sección
         this.cargarEquipos();   // Luego cargamos los equipos
       }
-    });
+    
   }
 
   cargarSeccion(): void {
@@ -162,6 +163,7 @@ export class EquiposComponent implements OnInit {
   onSelect(row: any): void {
     console.log('Equipo seleccionada:', row);
     this.selectedEquipoId = row.id;
+    this.dataService.setEquipoId(row.id);
     this.router.navigate(['/jugadores', this.selectedEquipoId]);
   }
 

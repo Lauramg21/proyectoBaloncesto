@@ -5,6 +5,7 @@ import { Router } from '@angular/router';  // Importa Router
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpClientJsonpModule } from '@angular/common/http';
+import { DataService } from '../../core/services/data.service';
 @Component({
   selector: 'app-jugadores',
   imports: [FormsModule,CommonModule,TableComponent, HttpClientJsonpModule],
@@ -18,23 +19,24 @@ export class JugadoresComponent implements OnInit {
   jugadoresData: any[] = [];
   columns: string[] = ['id', 'equipo', 'jugador', 'numero'];  
   actions = ['Seleccionar', 'Editar', 'Eliminar'];
+  seccionName: string = '';  
+
   equipoName: string = '';  
   selectedJugadorId: number | null = null;
 
   mostrarVentana = false;
   nuevoJugador = { nombre: '', numero: ''};
   jugadorEditar: any = null;
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: DataService) {}
 
   ngOnInit(): void {
     // Obtener el 'id' de los parámetros de la URL
-    this.route.params.subscribe(params => {
-      this.equipoId = +params['id']; 
+      this.equipoId = this.dataService.getEquipoId();
+      this.seccionId = this.dataService.getSeccionId();
       // Convierte el parámetro a número
-      console.log('Equipo ID:', this.equipoId);
+      this.cargarSeccion();
       this.cargarEquipo();  
       this.cargarJugadores();
-    });
   }
 
   cargarJugadores(): void {
@@ -59,6 +61,19 @@ export class JugadoresComponent implements OnInit {
     }
   }
   
+  cargarSeccion(): void {
+    if (this.seccionId !== null) {
+      this.http.get<any>(`http://localhost:3000/api/secciones/${this.seccionId}`).subscribe(
+        data => {
+          this.seccionName = data.Seccion;  // Asignar el nombre de la sección
+          console.log('Nombre de la sección:', this.seccionName);
+        },
+        error => {
+          console.error('Error al obtener la sección:', error);
+        }
+      );
+    }
+  }
 
   cargarEquipo(): void {
     console.log("ha entrao");
@@ -103,7 +118,7 @@ export class JugadoresComponent implements OnInit {
   }
 
   volverAEquipos(): void {
-    this.router.navigate(['/equipos', this.seccionId]); // Cambia esta ruta si es diferente
+    this.router.navigate(['/equipos', this.dataService.getSeccionId()]); // Cambia esta ruta si es diferente
   }
 
   cerrarVentana(): void {
@@ -170,5 +185,8 @@ export class JugadoresComponent implements OnInit {
     );
   }
 
+  volverASecciones(): void {
+    this.router.navigate(['/secciones']); // Esto redirige a la ruta de las secciones
+  }
 }
 

@@ -5,10 +5,9 @@ import { FormsModule } from '@angular/forms'; // Importa FormsModule para usar n
 import { TableComponent } from '../../components/table/table.component';
 import { EquiposComponent } from '../equipos/equipos.component';
 import { Router } from '@angular/router';  // Importa Router
-
+import { DataService } from '../../core/services/data.service';
 @Component({
   selector: 'app-secciones',
-  standalone: true,
   imports: [CommonModule, HttpClientModule, FormsModule, TableComponent, EquiposComponent],
   templateUrl: './secciones.component.html',
   styleUrls: ['./secciones.component.css']
@@ -24,7 +23,7 @@ export class SeccionesComponent implements OnInit {
   nuevaSeccion = { nombre: '' };
   seccionEditar: any = null; // Nuevo estado para la sección a editar
 
-  constructor(private http: HttpClient, private router: Router ) { } // Inyecta Router
+  constructor(private http: HttpClient, private router: Router,private dataService: DataService ) { } // Inyecta Router
 
   ngOnInit(): void {
     // Obtener las secciones al cargar el componente
@@ -111,6 +110,7 @@ export class SeccionesComponent implements OnInit {
   onSelect(row: any): void {
     console.log('Sección seleccionada:', row);
     this.selectedSectionId = row.Id;
+    this.dataService.setSeccionId(row.Id);
 
     this.router.navigate(['/equipos', this.selectedSectionId]);  // Navegar a la ruta de equipos
   }

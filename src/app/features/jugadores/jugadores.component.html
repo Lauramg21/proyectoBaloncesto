@@ -1,11 +1,19 @@
-<div *ngIf="equipoName">
-    <button class="back-button" (click)="volverAEquipos()">
+<div class="selecciones">
+  <div *ngIf="seccionName">
+    <button class="back-button" (click)="volverASecciones()">
       <div class="botonVolver">
-        {{ equipoName }} <i class="fas fa-times"></i>
+        {{ seccionName }} <i class="fas fa-times"></i>
       </div>
     </button>
   </div>
-
+  <div *ngIf="equipoName">
+      <button class="back-button" (click)="volverAEquipos()">
+        <div class="botonVolver">
+          {{ equipoName }} <i class="fas fa-times"></i>
+        </div>
+      </button>
+  </div>
+</div>
 <div class="jugadores-container" *ngIf="jugadoresData.length > 0">
     <h1>Jugadores del {{ equipoName }}</h1>
     <app-table [data]="jugadoresData" [columns]="columns" [actions]="actions" (edit)="onEdit($event)"
