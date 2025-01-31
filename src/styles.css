@@ -1,11 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+
+
 :root {
   --black-color: #0000; /* Negro */
   --main-color: #ed6b44; /* Naranja claro */
+  --title-color: #b35336; /* Naranja claro */
   --main-color2: #ed6b4490; /* Naranja claro */
   --footer-color: #793300; /* Naranja oscuro para el pie de página */
   --shadow-color: rgba(48, 48, 48, 0.55);
   --navbar-color: #d3d3d36d;
+  --orange-color: #ffdbd5;
+  --fondo-color:#ff91563c;
 }
 
 * {

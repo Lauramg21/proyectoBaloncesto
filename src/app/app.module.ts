@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +10,8 @@ import { SeccionesComponent } from './features/secciones/secciones.component';
 import { TableComponent } from './components/table/table.component';
 import { EquiposComponent } from './features/equipos/equipos.component';
 import { DataService } from './core/services/data.service';
+import { CalendarioComponent } from './features/calendario/calendario.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,14 +20,15 @@ import { DataService } from './core/services/data.service';
     HomeComponent,
     SeccionesComponent,
     TableComponent,
-    EquiposComponent
+    EquiposComponent,
+    CalendarioComponent // Asegúrate de declarar tu componente
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
-  ],
+    ],
   providers: [DataService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
