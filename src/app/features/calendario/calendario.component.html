@@ -1,30 +1,120 @@
 <div class="calendar">
-    <!-- Cabecera del calendario -->
-    <div class="calendar-header">
-      <button (click)="changeMonth(-1)">&lt;</button>
-      <span>{{ currentMonth | date: 'MMMM yyyy' }}</span>
-      <button (click)="changeMonth(1)">&gt;</button>
+  <!-- Cabecera del calendario -->
+  <div class="calendar-header">
+    <button (click)="changeMonth(-1)">&lt;</button>
+    <span>{{ currentMonth | date : "MMMM yyyy" }}</span>
+    <button (click)="changeMonth(1)">&gt;</button>
+  </div>
+
+  <!-- Días de la semana -->
+  <div class="calendar-days-of-week">
+    <div *ngFor="let day of daysOfWeek" class="calendar-day-name">
+      {{ day }}
     </div>
-    
-    <!-- Días de la semana -->
-    <div class="calendar-days-of-week">
-      <div *ngFor="let day of daysOfWeek" class="calendar-day-name">
-        {{ day }}
-      </div>
-    </div>
-  
-    <!-- Cuerpo del calendario -->
-    <div class="calendar-body">
-      <div class="calendar-week" *ngFor="let week of calendarWeeks">
-        <div *ngFor="let day of week.days" class="calendar-day" [ngClass]="{'empty': !day}">
-            <span *ngIf="day">{{ day.getDate() }}</span>
-          </div>
+  </div>
+
+  <!-- Cuerpo del calendario -->
+  <div class="calendar-body">
+    <div class="calendar-week" *ngFor="let week of calendarWeeks">
+      <div
+        *ngFor="let day of week.days"
+        class="calendar-day"
+        [ngClass]="{ empty: !day }"
+      >
+        <span *ngIf="hasMatch(day)" class="match-label">Partidos</span>
+        <button
+          *ngIf="day"
+          [id]="formatDateLocal(day)"
+          [ngClass]="{ 'has-match': hasMatch(day) }"
+          (click)="onDayClick(day)"
+        >
+          {{ day.getDate() }}
+        </button>
       </div>
     </div>
   </div>
 
-
-  <div class="botonAnadir">
-    <button>Añadir Partido</button>
+  <!-- Botón para abrir el formulario -->
+  <div class="buttonMatch">
+    <button (click)="openCreateMatchForm()" class="createMatch">
+      Crear Partido
+    </button>
   </div>
-  
+
+  <!-- Formulario emergente -->
+  <div *ngIf="isFormVisible" class="form-overlay">
+    <div class="form-container">
+      <h3>Crear Nuevo Partido</h3>
+      <form (ngSubmit)="submitForm()">
+        <!-- Desplegable para seleccionar la sección -->
+        <label for="seccion">Selecciona una sección:</label>
+        <select
+          id="seccion"
+          [(ngModel)]="newMatch.idEquipo"
+          name="seccion"
+          (change)="loadEquiposPorSeccion(newMatch.idEquipo)"
+        >
+          <option *ngFor="let seccion of secciones" [value]="seccion.id">
+            {{ seccion.nombre }}
+          </option>
+        </select>
+
+        <!-- Desplegable para seleccionar el equipo -->
+        <label for="equipo">Selecciona un equipo:</label>
+        <select id="equipo" [(ngModel)]="newMatch.idEquipo" name="equipo">
+          <option *ngFor="let equipo of equipos" [value]="equipo.id">
+            {{ equipo.nombre }}
+          </option>
+        </select>
+
+        <label for="local">¿Es local?</label>
+        <select id="local" [(ngModel)]="newMatch.local" name="local">
+          <option value="Local">Local</option>
+          <option value="Visitante">Visitante</option>
+        </select>
+
+        <label for="rival">Equipo Rival:</label>
+        <input
+          type="text"
+          id="rival"
+          [(ngModel)]="newMatch.rival"
+          name="rival"
+          required
+        />
+
+        <label for="fecha">Fecha del Partido:</label>
+        <input
+          type="date"
+          id="fecha"
+          [(ngModel)]="newMatch.fecha"
+          name="fecha"
+          required
+        />
+
+        <button type="submit">Crear Partido</button>
+        <button type="button" (click)="closeCreateMatchForm()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL para mostrar los partidos del día -->
+  <div *ngIf="isModalVisible" class="modal-overlay">
+    <div class="modal">
+      <h2>Partidos del {{ selectedDate }}</h2>
+      <ul>
+        <li *ngFor="let partido of selectedPartidos">
+          <span *ngIf="partido.local === 'Local'">
+            {{ partido.team1 }} vs {{ partido.rival }}
+          </span>
+          <span *ngIf="partido.local !== 'Local'">
+            {{ partido.rival }} vs {{ partido.team1 }}
+          </span>
+          <button class="estadisticas" (click)="verEstadisticas(partido)">
+            Estadísticas
+          </button>
+        </li>
+      </ul>
+      <button class="close-btn" (click)="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,3 @@
-/* Estilo básico para el calendario */
 .calendar {
   width: 900px;
   margin: 20px auto;
@@ -7,19 +6,20 @@
   background-color: var(--fondo-color);
   border-radius: 10px;
 }
+
 .calendar-day.empty {
-    background-color: var(--fondo-color); /* Puedes cambiar este color por el que prefieras */
-    border: 0;
-  }
+  background-color: var(--fondo-color);
+  border: 0;
+}
+
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
-  color: var(--title-color);
   font-weight: bold;
   font-size: 30px;
   margin-bottom: 30px;
+  color: var(--title-color);
 }
 
 .calendar-header button {
@@ -34,12 +34,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
-  margin-bottom: 10px;
-}
-
-.calendar-day-name {
   font-weight: bold;
-  color: var(--main-color);
 }
 
 .calendar-body {
@@ -53,44 +48,170 @@
 }
 
 .calendar-day {
-  padding: 10px;
+  padding: 0;
   border: 0.5px solid #ccc;
   box-sizing: border-box;
-  height: 50px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-day .match-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background-color: var(--blueDark-color);
+  width: 100%;
+}
+
+.calendar-day button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.calendar-day .has-match {
+  background-color: var(--blue-color);
+  font-weight: bold;
+}
+
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
 }
 
-.calendar-day span {
-  display: block;
+.form-container {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px;
 }
 
-.calendar-day:hover {
-  background-color: #ffd4c2ad;
+form {
+  display: flex;
+  flex-direction: column;
 }
 
+form label {
+  margin-top: 10px;
+}
 
+form input,
+form select {
+  margin-bottom: 10px;
+  padding: 5px;
+}
 
-.botonAnadir{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px;
-    margin-bottom: 40px;
-  }
+form button {
+  margin-top: 10px;
+  padding: 10px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
 
-  .botonAnadir button{
-    background-color: var(--main-color2);
-    border-radius: 20px;
-    border: 2px solid var(--main-color);
-    padding: 9px;
-    font-weight: bold;
-    font-size: 15px;
-    cursor: pointer;
-    transition: transform 0.3s ease;    
-  }
-  .botonAnadir button:hover {
-    transform: scale(1.1);
-  }
+form button[type="button"] {
+  background: #f44336;
+}
+
+form button[type="submit"]:hover,
+form button[type="button"]:hover {
+  opacity: 0.8;
+}
+
+.buttonMatch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+.createMatch {
+  background-color: var(--footer-color); /* Color de fondo verde */
+  color: white; /* Color del texto */
+  font-size: 16px; /* Tamaño de la fuente */
+  padding: 10px 20px; /* Espaciado interno (arriba/abajo y izquierda/derecha) */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor a puntero */
+  transition: background-color 0.3s, transform 0.2s; /* Efecto de transición */
+}
+
+.createMatch:hover {
+  background-color: var(
+    --title-color
+  ); /* Color de fondo al pasar el mouse (hover) */
+  transform: scale(1.05); /* Efecto de agrandamiento */
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 500px;
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.modal ul {
+  list-style: none;
+  padding: 0;
+}
+
+.modal li {
+  margin: 10px 0;
+}
+
+.estadisticas {
+  margin-top: 10px;
+  margin-left: 15px;
+  padding: 5px 10px;
+  border: none;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.estadisticas:hover {
+  background: #0056b3;
+}
+
+.close-btn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: none;
+  background: red;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}

@@ -335,3 +335,52 @@ app.put('/api/jugadores/:id', (req, res) => {
     res.json({ id, nombre, numero,equipoId });
   });
 });
+
+
+//-----------PARTIDOS----------------
+
+app.get('/api/partidos', (req, res) => {
+  pool.query(`
+    SELECT 
+      p.Id, 
+      e.Equipo AS equipoClub,
+      CASE 
+        WHEN p.Local = 0 THEN 'Local' 
+        ELSE 'Visitante' 
+      END AS local,
+      p.Rival, 
+      p.Fecha
+    FROM 
+      Partidos p
+    JOIN 
+      Equipos e ON p.IdEquipo = e.Id
+    ORDER BY 
+      p.fecha;
+  `, (err, results) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(results);
+  });
+});
+
+app.post('/api/partidos', (req, res) => {
+  const { idEquipo, local, rival, fecha } = req.body;  // Obtenemos los datos del cuerpo de la solicitud
+
+  // Validar los datos (puedes agregar más validaciones si es necesario)
+  if (!idEquipo || !rival || !fecha || typeof local !== 'number') {
+    return res.status(400).json({ message: 'Faltan campos requeridos o formato inválido.' });
+  }
+  
+  // Insertar el partido en la base de datos
+  pool.query('INSERT INTO Partidos (IdEquipo, Local, Rival, Fecha) VALUES (?, ?, ?, ?)',[idEquipo, local, rival, fecha], (err, result) =>{
+    if (err) {
+      console.error('Error al insertar el partido:', err);
+      return res.status(500).json({ message: 'Error al crear el partido.' });
+    }
+
+    console.log('Partido creado con éxito:', result);
+    res.status(201).json({ message: 'Partido creado exitosamente.' });
+  });
+});
